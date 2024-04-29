@@ -1,0 +1,17 @@
+{
+    "nama": "Toko Buku Sisfo",
+    "pengarang": "Yoga",
+    "alamat": "Jl. Telekomunikasi 1",
+    "koleksi": [
+        {
+            "judul": "Belajar Python",
+            "pengarang": "Pak Wahyu",
+            "tahunTerbit": "2022"
+        },
+        {
+            "judul": "Belajar PHP",
+            "pengarang": "Pak Petrick",
+            "tahunTerbit": "2023"
+        }
+    ]
+}
