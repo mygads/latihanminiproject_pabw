@@ -1,21 +1,24 @@
-window.onload = function() {
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            var tokoBuku = JSON.parse(this.responseText);
-            document.getElementById("infoToko").innerHTML = 
+$(document).ready(function() {
+    $.ajax({
+        url: 'toko_buku.json',
+        type: 'GET',
+        dataType: 'json',
+        success: function(tokoBuku) {
+            $("#infoToko").html(
                 "Nama Toko: " + tokoBuku.nama + "<br>" +
                 "Pengarang: " + tokoBuku.pengarang + "<br>" +
-                "Alamat: " + tokoBuku.alamat;
-            var tabel = document.getElementById("koleksiBuku");
-            tokoBuku.koleksi.forEach(function(buku) {
-                var row = tabel.insertRow(-1);
-                row.insertCell(0).innerHTML = buku.judul;
-                row.insertCell(1).innerHTML = buku.pengarang;
-                row.insertCell(2).innerHTML = buku.tahunTerbit;
+                "Alamat: " + tokoBuku.alamat
+            );
+            $.each(tokoBuku.koleksi, function(i, buku) {
+                var row = $("<tr>");
+                row.append($("<td>").text(buku.judul));
+                row.append($("<td>").text(buku.pengarang));
+                row.append($("<td>").text(buku.tahunTerbit));
+                $("#koleksiBuku").append(row);
             });
+        },
+        error: function(error) {
+            console.log("Error: ", error);
         }
-    };
-    xhr.open("GET", "toko_buku.json", true);
-    xhr.send();
-}
+    });
+});
